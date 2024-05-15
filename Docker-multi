@@ -1,0 +1,31 @@
+# Base build
+
+FROM python:3.12-alpine as base
+
+RUN apk add --update --virtual .build-deps \
+    build-base \
+    python3-dev
+
+WORKDIR /usr/src/app
+
+COPY myproject/requirements.txt .
+
+RUN pip install -r requirements.txt
+
+
+# Now multistage build
+
+FROM python:3.12-alpine
+
+COPY --from=base /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3.12/site-packages/
+
+COPY --from=base /usr/local/bin/ /usr/local/bin/
+
+COPY ./myproject .
+
+RUN rm -rf /var/lib/apt/lists/*
+
+EXPOSE 8000
+
+ENTRYPOINT ["python", "manage.py"]
+CMD ["runserver", "0.0.0.0:8000"]
