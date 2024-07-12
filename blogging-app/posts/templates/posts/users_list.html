@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Users
+{% endblock %}
+
+{% block content %}
+    <section>
+    <h1>Registered Users</h1>
+
+    <table>
+        <tr>
+            <th> Name </th>
+            <th> SuperUser </th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td> {{ user.username }} </td>
+            <td> {% if user.is_superuser == True %} Yes {% else %} No {% endif %} </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    </section>
+{% endblock %}
