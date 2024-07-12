@@ -22,4 +22,6 @@ jobs:
           SOURCE: "./"
           REMOTE_HOST: "ec2-65-0-134-6.ap-south-1.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
-          TARGET: "/home/ubuntu/blogging-app"
+          TARGET: "/home/ubuntu/blogging-app
+
+workflow_dispatch:
