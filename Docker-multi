@@ -8,7 +8,7 @@ RUN apk add --update --virtual .build-deps \
 
 WORKDIR /usr/src/app
 
-COPY myproject/requirements.txt .
+COPY blogging-app/requirements.txt .
 
 RUN pip install -r requirements.txt
 
@@ -21,7 +21,7 @@ COPY --from=base /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3
 
 COPY --from=base /usr/local/bin/ /usr/local/bin/
 
-COPY ./myproject .
+COPY ./blogging-app .
 
 RUN rm -rf /var/lib/apt/lists/*
 
