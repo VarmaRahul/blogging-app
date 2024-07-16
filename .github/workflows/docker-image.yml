@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: Deploy to remote server
-        if: steps.get-container.outputs.stdout != ''
+        #if: steps.get-container.outputs.stdout != ''
         uses: easingthemes/ssh-deploy@v5.0.3        
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
