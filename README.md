@@ -1,1 +1,0 @@
-![example branch parameter](https://github.com/VarmaRahul/blogging-app/blob/main/.github/workflows/ec2-deploy.yml/badge.svg?branch=main)
