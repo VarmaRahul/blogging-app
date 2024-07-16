@@ -21,6 +21,6 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           SOURCE: "./"
-          REMOTE_HOST: "ec2-65-0-134-6.ap-south-1.compute.amazonaws.com"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/blogging-app"
