@@ -35,12 +35,13 @@ jobs:
     steps:
       - name: Deploy to remote server
         if: steps.get-container.outputs.stdout != ''
-        uses: appleboy/ssh-action@v0.1.5
+        uses: easingthemes/ssh-deploy@v5.0.3        
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: "ubuntu"
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: "ubuntu"
+
+          SCRIPT_AFTER: |
             CONTAINER_NAME=$(docker ps --filter "ancestor=xedose/blogging-image:latest" --format "{{.Names}}")
             echo "Running container: $CONTAINER_NAME"
             docker pull xedose/blogging-image:latest
