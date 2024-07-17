@@ -46,5 +46,4 @@ jobs:
               docker rm $CONTAINER_NAME
             fi
             docker run -d --name django-blog -p 8000:8000 xedose/blogging-image:latest
-            #cd blogging-app
-            docker compose up -d
+            systemctl reload nginx
