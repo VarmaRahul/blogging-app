@@ -8,5 +8,3 @@ services:
     volumes:
       - /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf  # Mount Nginx config file
       - /etc/letsencrypt/live/webdevman.me:/etc/letsencrypt/live/webdevman.me  # Mount SSL certificates
-    depends_on:
-      - django-blog
