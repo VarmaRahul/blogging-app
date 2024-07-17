@@ -49,4 +49,20 @@ jobs:
               docker stop $CONTAINER_NAME
               docker rm $CONTAINER_NAME
             fi
-            docker run -d --name django-blog -p 80:8000 xedose/blogging-image:latest
+            docker run -d --name django-blog -p 8000:8000 xedose/blogging-image:latest
+  
+  start-app:
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: start docker compose
+        uses: easingthemes/ssh-deploy@v5.0.3
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: "ubuntu"
+
+          SCRIPT_AFTER: |
+            cd /home/ubuntu/blogging-app
+            docker compose up -d

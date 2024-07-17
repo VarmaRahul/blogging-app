@@ -1,0 +1,28 @@
+# dockercompose file
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "90:80"
+    volumes:
+      - /home/ubuntu/hello-world:/usr/share/nginx/html
+
+  django-blog:
+      build:
+        context: .
+      ports:
+        - "8000:8000"  # Map container's port 8000 to host port 80
+      environment:
+        - DEBUG=0  # Set to 0 for production
+      # Add other configurations as needed (e.g., volumes for persistent data)
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf  # Mount Nginx config file
+      - /etc/letsencrypt/live/webdevman.me:/etc/letsencrypt/live/webdevman.me  # Mount SSL certificates
+    depends_on:
+      - django-blog
