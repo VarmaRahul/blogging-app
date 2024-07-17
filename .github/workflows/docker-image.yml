@@ -50,5 +50,5 @@ jobs:
               docker rm $CONTAINER_NAME
             fi
             docker run -d --name django-blog -p 8000:8000 xedose/blogging-image:latest
-            cd /home/ubuntu/blogging-app
-            docker compose up -d
+            #cd /home/ubuntu/blogging-app
+            #docker compose up -d
