@@ -6,7 +6,6 @@ A containerized Django 5.1 development platform featuring integrated application
 
 - **Blogging App (`posts`):** A content management system supporting image uploads (via Pillow), slug-based routing, and author-attributed posts.
 - **Calculator (`game`):** A web-based utility for performing basic arithmetic operations.
-- **Todo App (`todoapp`):** A task management interface for organizing daily activities.
 - **Users App (`users`):** A secure authentication layer handling user registration, login, and session management using Django's built-in security features.
 
 ## 🛠️ Tech Stack
