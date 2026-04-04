@@ -1,3 +1,3 @@
-docker build . -t django-blog -f Docker-alpine
-
-docker run -d -p 8000:8000 django-blog
+docker build . -t xedose/blogging-image -f Docker-alpine
+docker push xedose/blogging-image
+docker run -d -p 8000:8000 xedose/blogging-image
