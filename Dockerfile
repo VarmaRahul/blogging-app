@@ -5,9 +5,9 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
-COPY blogging-app/requirements.txt .
+COPY app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY ./blogging-app .
+COPY ./app .
 
 EXPOSE 8000
 ENTRYPOINT ["python", "manage.py"]
