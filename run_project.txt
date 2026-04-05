@@ -1,3 +1,7 @@
-docker build . -t xedose/blogging-image -f Docker-alpine
-docker push xedose/blogging-image
-docker run -d -p 8000:8000 xedose/blogging-image
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+
+docker build --no-cache -t xedose/blogging-app -f Docker-multi .
+docker push xedose/blogging-app
+docker run -d -p 8000:8000 xedose/blogging-app

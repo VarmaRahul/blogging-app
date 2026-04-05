@@ -1,0 +1,34 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Django
+db.sqlite3
+app/db/db.sqlite3
+app/assets/
+app/media/
+
+# Environment secrets (VERY IMPORTANT)
+.env
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store

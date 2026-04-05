@@ -20,19 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-@6kz*k^+vcqewv108szj1@=180m=rj2-x8fx5se+zat4-uqcn@'
+load_dotenv(BASE_DIR.parent / ".env")   # 👈 loads .env file
 
-# SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-
-#ALLOWED_HOSTS = ["localhost","127.0.0.1","*"]
-
-load_dotenv()   # 👈 loads .env file
-
-SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = os.getenv("DEBUG") == "True"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-dev-key-12345")
+DEBUG = os.getenv("DEBUG", "True") == "True"
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 # Application definition
 
@@ -85,7 +77,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/app/db/db.sqlite3'    
+        'NAME': BASE_DIR / 'db' / 'db.sqlite3',
     }
 }
 
@@ -137,3 +129,10 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if os.environ.get('RUN_MAIN') == 'true':
+    print("---------------------------------")
+    print(f"Project Base Dir: {BASE_DIR}")
+    print(f"Is .env loading SECRET_KEY?: {'Yes' if SECRET_KEY else 'No'}")
+    print(f"Allowed Hosts: {ALLOWED_HOSTS}")
+    print("---------------------------------")
