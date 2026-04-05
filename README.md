@@ -19,7 +19,7 @@ A containerized Django 5.1 development platform featuring integrated application
 ## 📂 Infrastructure & DevOps
 
 This repository includes several professional-grade deployment configurations:
-- **Multi-Stage Builds:** `Docker-multi` uses a build-base stage to compile dependencies, resulting in a significantly smaller final production image.
+- **Multi-Stage Builds:** `Dockerfile` uses a build-base stage to compile dependencies, resulting in a significantly smaller final production image.
 - **Kubernetes Manifests:** Includes `deployment.yml`, `service.yml`, and `namespace.yml` for deploying the application into a dedicated `django` namespace.
 - **CI/CD Pipelines:** GitHub Actions workflows (`docker-image.yml` and `ec2-deploy.yml`) automate the process of building images for DockerHub and deploying them to AWS EC2 via SSH.
 - **NGINX Proxy:** A pre-configured `webdomain` file for NGINX handles reverse proxying to port 8000 and enforces HTTPS redirection.
@@ -43,8 +43,8 @@ python blogging-app/manage.py runserver
 3. **Docker Execution**
 **To run the application using the optimized Alpine configuration:**
 ```bash
-docker build . -t django-blog -f Docker-alpine
-docker run -d -p 8000:8000 django-blog
+docker build . -t blogging-app
+docker run -d -p 8000:8000 blogging-app
 ```
 
 ## ⚙️ CI/CD Configuration

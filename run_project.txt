@@ -2,7 +2,7 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 
-docker build --no-cache -t xedose/blogging-app -f Docker-multi .
+docker build --no-cache -t xedose/blogging-app .
 docker push xedose/blogging-app
 docker run -d -p 8000:8000 xedose/blogging-app
 
