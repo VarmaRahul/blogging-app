@@ -5,3 +5,25 @@ python manage.py runserver
 docker build --no-cache -t xedose/blogging-app -f Docker-multi .
 docker push xedose/blogging-app
 docker run -d -p 8000:8000 xedose/blogging-app
+
+
+
+------------------------
+
+monitoring stack
+ingress controller
+
+nginx proxy
+
+
+
+
+
+
+
+kubectl create namespace argocd
+kubectl apply --server-side --force-conflicts -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl get svc -n argocd
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
+kubectl port-forward -n argocd service/argocd-server 8443:443 --address 0.0.0.0 &
+
