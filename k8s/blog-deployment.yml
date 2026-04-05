@@ -104,24 +104,24 @@ spec:
           httpGet:
             path: /
             port: 8000
-          failureThreshold: 30
-          periodSeconds: 2
+          failureThreshold: 20
+          periodSeconds: 5
 
         # liveness probe
         livenessProbe:
           httpGet:
             path: /
             port: 8000
-          initialDelaySeconds: 10
-          periodSeconds: 10
+          initialDelaySeconds: 0
+          periodSeconds: 20
 
         # readiness probe
         readinessProbe:
           httpGet:
             path: /
             port: 8000
-          initialDelaySeconds: 10
-          periodSeconds: 5
+          initialDelaySeconds: 0
+          periodSeconds: 10
 
       # volumes
       volumes:
