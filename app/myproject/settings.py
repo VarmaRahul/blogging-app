@@ -24,7 +24,7 @@ load_dotenv(BASE_DIR.parent / ".env")   # 👈 loads .env file
 
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-dev-key-12345")
 DEBUG = os.getenv("DEBUG", "True") == "True"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
 # Application definition
 
@@ -77,19 +77,18 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 import os
 
 # Check if we are running in Kubernetes/Production
-if os.environ.get('USE_POSTGRES') == 'True':
+if os.getenv('USE_POSTGRES') == 'True':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('DB_NAME', 'postgres'),
-            'USER': os.environ.get('DB_USER', 'postgres'),
-            'PASSWORD': os.environ.get('DB_PASSWORD', 'postgres'),
-            'HOST': os.environ.get('DB_HOST', 'db-service'),
-            'PORT': os.environ.get('DB_PORT', '5432'),
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
         }
     }
 else:
-    # Fallback to SQLite for local development
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

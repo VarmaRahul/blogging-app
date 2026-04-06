@@ -21,7 +21,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /usr/src/app
 
 # 4. Install RUNTIME dependencies only (e.g., shared libs for Pillow)
-RUN apk add --no-cache libjpeg zlib libffi
+RUN apk add --no-cache libjpeg zlib libffi libpq
 
 # 5. Copy wheels from builder and install them
 COPY --from=builder /usr/src/app/wheels /wheels
@@ -32,6 +32,9 @@ RUN pip install --no-cache /wheels/*
 # Since your manage.py is in 'app/', we copy the contents of 'app' to the current WORKDIR
 COPY ./app .
 
+RUN adduser -D appuser
+USER appuser
+
 EXPOSE 8000
 
-CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+CMD ["gunicorn", "myproject.wsgi:application", "--bind", "0.0.0.0:8000"]

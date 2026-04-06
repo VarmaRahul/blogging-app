@@ -14,6 +14,7 @@ spec:
       labels:
         app: postgres
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
       - name: postgres
         image: postgres:15
@@ -22,7 +23,6 @@ spec:
         volumeMounts:
         - name: postgres-storage
           mountPath: /var/lib/postgresql/data # This is the "Base Dir" for Postgres internally
-          subPath: postgres
         # env from ConfigMap 
         envFrom:
         - configMapRef:
@@ -30,6 +30,26 @@ spec:
         # env from Secret
         - secretRef:
             name: postgres-secret
+        
+        readinessProbe:
+          exec:
+            command: ["pg_isready", "-U", "postgres"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
+        livenessProbe:
+          exec:
+            command: ["pg_isready", "-U", "postgres"]
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        
+        resources:
+        requests:
+          cpu: "250m"
+          memory: "256Mi"
+        limits:
+          cpu: "500m"
+          memory: "512"
 
       volumes:
       - name: postgres-storage
