@@ -2,7 +2,7 @@
 FROM python:3.12-alpine AS builder
 
 # 1. Install build dependencies (needed for Pillow, etc.)
-RUN apk add --no-cache gcc musl-dev python3-dev libffi-dev jpeg-dev zlib-dev
+RUN apk add --no-cache gcc musl-dev python3-dev libffi-dev jpeg-dev zlib-dev libjpeg zlib libffi libpq
 
 WORKDIR /usr/src/app
 

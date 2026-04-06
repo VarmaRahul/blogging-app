@@ -23,17 +23,3 @@ spec:
   resources:
     requests:
       storage: 100Mi
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-pvc
-  namespace: blog
-
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 300Mi

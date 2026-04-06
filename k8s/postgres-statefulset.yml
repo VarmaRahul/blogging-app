@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-db
+  namespace: blog
+spec:
+  serviceName: "db-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data # This is the "Base Dir" for Postgres internally
+          subPath: postgres
+        # env from ConfigMap 
+        envFrom:
+        - configMapRef:
+            name: postgres-config
+        # env from Secret
+        - secretRef:
+            name: postgres-secret
+
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc

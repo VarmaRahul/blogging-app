@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-deployment
+  namespace: blog
+  labels:
+    app: live-django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: live-django
+  template:
+    metadata:
+      labels:
+        app: live-django
+    spec:
+      # main container
+      containers:
+      - name: django
+        image: xedose/blogging-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+
+        # volume mount
+        volumeMounts:
+        - name: sqlite-data
+          mountPath: /db
+        - name: media-data
+          mountPath: /media
+
+        # env from ConfigMap 
+        envFrom:
+        - configMapRef:
+            name: app-config
+        # env from Secret
+        - secretRef:
+            name: app-secret
+
+        # resource limits
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "400m"
+            memory: "512Mi"
+
+        # startup probe
+        startupProbe:
+          httpGet:
+            path: /
+            port: 8000
+          failureThreshold: 20
+          periodSeconds: 5
+
+        # liveness probe
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 0
+          periodSeconds: 20
+
+        # readiness probe
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 0
+          periodSeconds: 10
+
+      # volumes
+      volumes:
+      - name: sqlite-data
+        persistentVolumeClaim:
+          claimName: django-pvc
+      - name: media-data
+        persistentVolumeClaim:
+          claimName: media-pvc
