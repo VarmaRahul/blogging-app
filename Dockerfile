@@ -26,11 +26,12 @@ RUN apk add --no-cache libjpeg zlib libffi libpq
 # 5. Copy wheels from builder and install them
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
-RUN pip install --no-cache /wheels/*
+RUN pip install --no-cache-dir -r requirements.txt
 
 # 6. Copy your project code
 # Since your manage.py is in 'app/', we copy the contents of 'app' to the current WORKDIR
 COPY ./app .
+RUN python manage.py collectstatic --noinput
 
 RUN adduser -D appuser
 USER appuser

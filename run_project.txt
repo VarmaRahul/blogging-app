@@ -11,3 +11,13 @@ docker-compose up --build -d
 # Build and push image to repo
 docker build --no-cache -t xedose/blogging-app .
 docker push xedose/blogging-app
+
+kubectl rollout restart deployment django-deployment -n blog
+
+
+
+kubectl create namespace argocd
+kubectl apply --server-side --force-conflicts -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl get svc -n argocd
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
+kubectl port-forward -n argocd service/argocd-server 8443:443 --address 0.0.0.0 &
