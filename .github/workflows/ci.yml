@@ -93,5 +93,3 @@ jobs:
           image-ref: xedose/blogging-app:v1.0.${{ github.run_number }}
           format: table
           severity: CRITICAL,HIGH
-      - name: Push Image
-        run: docker push xedose/blogging-app:v1.0.${{ github.run_number }}
