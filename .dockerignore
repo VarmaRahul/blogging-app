@@ -1,8 +1,12 @@
+# -------------------------------
 # Git
+# -------------------------------
 .git
 .gitignore
 
+# -------------------------------
 # Python
+# -------------------------------
 __pycache__/
 *.pyc
 *.pyo
@@ -14,21 +18,33 @@ venv/
 pip-log.txt
 pip-delete-this-directory.txt
 
+# -------------------------------
 # Django
+# -------------------------------
 db.sqlite3
 app/db/db.sqlite3
 app/assets/
 app/media/
 
+# -------------------------------
 # Environment secrets (VERY IMPORTANT)
-.env
+# -------------------------------
+.env*
 
-# Docker
-Dockerfile
+# -------------------------------
+# Docker (keep only runtime files)
+# -------------------------------
 docker-compose.yml
-.dockerignore
 
+# -------------------------------
 # Editor/OS
+# -------------------------------
 .vscode/
 .idea/
 .DS_Store
+
+# -------------------------------
+# Logs / temp
+# -------------------------------
+*.log
+tmp/

@@ -10,7 +10,6 @@ WORKDIR /usr/src/app
 COPY requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
-
 # --- Stage 2: Final Runtime ---
 FROM python:3.12-alpine
 
@@ -38,4 +37,7 @@ USER appuser
 
 EXPOSE 8000
 
-CMD ["gunicorn", "myproject.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "myproject.wsgi:application", \
+     "--bind", "0.0.0.0:8000", \
+     "--workers", "3", \
+     "--threads", "2"]

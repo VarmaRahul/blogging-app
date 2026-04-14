@@ -1,21 +1,59 @@
-# Environments
+# -------------------------------
+# Python environments
+# -------------------------------
 .venv/
 venv/
-.env
 
-# Python bytecode
+# -------------------------------
+# Environment variables (secrets)
+# -------------------------------
+.env*
+
+# -------------------------------
+# Python cache / bytecode
+# -------------------------------
 **/__pycache__/
 *.py[cod]
 *$py.class
 
-# Editor settings
+# -------------------------------
+# Editor / IDE files
+# -------------------------------
 **/.vscode/
 .idea/
 
-# SQLite database
+# -------------------------------
+# Git & CI (not needed in image)
+# -------------------------------
+.git
+.github
+.gitignore
+
+# -------------------------------
+# Database files
+# -------------------------------
 db.sqlite3
 *.sqlite3
 app/db/db.sqlite3
 
-# User-uploaded files (Media)
+# -------------------------------
+# User uploads (media)
+# -------------------------------
 app/media/
+
+# -------------------------------
+# Logs & temp
+# -------------------------------
+*.log
+tmp/
+
+# -------------------------------
+# OS files
+# -------------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------------
+# Dev-only files
+# -------------------------------
+docker-compose.yml
