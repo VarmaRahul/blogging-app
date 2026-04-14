@@ -26,7 +26,6 @@ venv/
 # Git & CI (not needed in image)
 # -------------------------------
 .git
-.github
 .gitignore
 
 # -------------------------------
