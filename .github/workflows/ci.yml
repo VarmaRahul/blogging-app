@@ -63,7 +63,7 @@ jobs:
 
   build-scan-push:
     name: Build, Scan & Push
-    needs: [lint, dockerfile-lint]
+    needs: [dockerfile-lint, dependency-scan, sast-codeql, gitleaks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
