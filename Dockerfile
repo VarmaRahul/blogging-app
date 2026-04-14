@@ -37,6 +37,8 @@ USER appuser
 
 EXPOSE 8000
 
+HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
+
 CMD ["gunicorn", "myproject.wsgi:application", \
      "--bind", "0.0.0.0:8000", \
      "--workers", "3", \
