@@ -11,7 +11,7 @@ A containerized Django 5.1 development platform featuring integrated application
 ## 🛠️ Tech Stack
 
 - **Backend:** Django 5.1.1
-- **Database:** SQLite 3
+- **Database:** Postgres 15
 - **Environment:** Python 3.12 (Alpine)
 - **Orchestration:** Kubernetes
 - **Web Server:** NGINX with SSL (Let's Encrypt)
