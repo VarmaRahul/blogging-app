@@ -1,0 +1,6 @@
+apiVersion: v2
+name: blogging-app
+description: Helm chart for the Django blogging application
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

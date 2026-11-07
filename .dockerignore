@@ -35,6 +35,7 @@ app/media/
 # Docker (keep only runtime files)
 # -------------------------------
 docker-compose.yml
+deploy/
 
 # -------------------------------
 # Editor/OS
