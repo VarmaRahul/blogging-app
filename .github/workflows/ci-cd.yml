@@ -62,7 +62,7 @@ jobs:
 
   build-scan-push:
     name: Build, Scan & GitOps Deploy
-    needs: [lint, dockerfile-lint, gitleaks, sast-codeql, dependency-scan]
+    needs: [dockerfile-lint, gitleaks, sast-codeql, dependency-scan]
     runs-on: ubuntu-latest
     permissions:
       contents: write # Required for git-auto-commit-action to push values.yaml changes back
