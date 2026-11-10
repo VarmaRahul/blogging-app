@@ -6,7 +6,7 @@ autoscaling:
 image:
   pullPolicy: IfNotPresent
   repository: xedose/blogging-app
-  tag: v1.0.6
+  tag: v1.0.7
 ingress:
   className: alb
   enabled: true
