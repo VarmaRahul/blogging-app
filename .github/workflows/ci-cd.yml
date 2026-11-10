@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 
 jobs:
+  deploy:
+    runs-on: self-hosted
+
   # lint:
   #   name: Lint Python
   #   runs-on: ubuntu-latest
