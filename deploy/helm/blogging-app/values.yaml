@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  repository: xedose/blogging-app:v1.0.3
+  repository: xedose/blogging-app
   tag: "latest"
   pullPolicy: IfNotPresent
 
