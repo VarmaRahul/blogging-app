@@ -6,23 +6,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
-    runs-on: self-hosted
-
-  # lint:
-  #   name: Lint Python
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-python@v5
-  #       with:
-  #         python-version: "3.12"
-  #     - run: pip install ruff
-  #     - run: ruff check .
-
   dockerfile-lint:
     name: Dockerfile Lint
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - uses: hadolint/hadolint-action@v3.1.0
@@ -31,7 +17,7 @@ jobs:
 
   gitleaks:
     name: Secrets Scan
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +25,7 @@ jobs:
 
   sast-codeql:
     name: SAST (CodeQL)
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     continue-on-error: true
     permissions:
       security-events: write
@@ -53,7 +39,7 @@ jobs:
 
   dependency-scan:
     name: Dependency Scan
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
@@ -66,7 +52,7 @@ jobs:
   build-scan-push:
     name: Build, Scan & GitOps Deploy
     needs: [dockerfile-lint, gitleaks, sast-codeql, dependency-scan]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: write # Required for git-auto-commit-action to push values.yaml changes back
     steps:
@@ -104,7 +90,6 @@ jobs:
           with open(path, "r") as f:
               data = yaml.safe_load(f)
           
-          # Updates image.tag in values.yaml (adjust structure if your values.yaml differs)
           if "image" in data:
               data["image"]["tag"] = "v1.0.${{ github.run_number }}"
           else:
