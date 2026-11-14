@@ -8,6 +8,6 @@ pyasn1==0.6.5
 PySimpleGUI==6.4
 python-dotenv==1.2.4
 rsa==4.9.1
-sqlparse==0.5.0
+sqlparse==0.6.1
 tzdata==2026.6
 whitenoise==6.12.0
