@@ -118,7 +118,7 @@ jobs:
           '
 
       - name: Commit and Push Updated Values to GitOps
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           file_pattern: deploy/helm/blogging-app/values.yaml
           commit_message: "chore(gitops): update image tag to v1.0.${{ github.run_number }} [skip ci]"
