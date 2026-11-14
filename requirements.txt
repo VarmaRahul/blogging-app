@@ -7,7 +7,7 @@ psycopg2-binary==2.9.9
 pyasn1==0.6.0
 PySimpleGUI==5.0.8.3
 python-dotenv==1.2.2
-rsa==4.9
+rsa==4.9.1
 sqlparse==0.5.0
 tzdata==2024.1
 whitenoise==6.12.0
