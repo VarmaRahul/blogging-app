@@ -1,5 +1,5 @@
 # --- Stage 1: Builder ---
-FROM python:3.12-alpine AS builder
+FROM python:3.15-alpine AS builder
 
 # 1. Install build dependencies
 RUN apk add --no-cache gcc musl-dev python3-dev libffi-dev jpeg-dev zlib-dev libjpeg zlib libffi libpq
@@ -11,7 +11,7 @@ COPY requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
 # --- Stage 2: Final Runtime ---
-FROM python:3.12-alpine
+FROM python:3.15-alpine
 
 # 3. Setup environment
 ENV PYTHONDONTWRITEBYTECODE=1 \
