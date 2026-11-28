@@ -95,7 +95,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Scan Image (Trivy)
-        uses: aquasecurity/trivy-action@v0.35.0
+        uses: aquasecurity/trivy-action@v0.36.0
         continue-on-error: true
         with:
           image-ref: xedose/blogging-app:v1.0.${{ github.run_number }}
