@@ -6,21 +6,23 @@
 version: 2
 updates:
   - package-ecosystem: pip
-    directory: /
+    directory: "/"
     schedule:
       interval: weekly
 
   - package-ecosystem: docker
-    directory: /
+    directory: "/"
     schedule:
       interval: weekly
 
   - package-ecosystem: docker
-    directory: /deploy/helm/blogging-app
+    directory: "/deployment/k8s"
     schedule:
       interval: weekly
+    ignore:
+      - dependency-name: "xedose/blogging-app"
 
   - package-ecosystem: github-actions
-    directory: /
+    directory: "/"
     schedule:
       interval: weekly

@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/VarmaRahul/blogging-app.git
     targetRevision: main
-    path: deploy/helm/blogging-app                     
+    path: deployment/k8s
   destination:
     server: https://kubernetes.default.svc
     namespace: blogging
@@ -16,5 +16,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true

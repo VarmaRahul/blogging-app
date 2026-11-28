@@ -3,6 +3,8 @@ name: CI/CD Pipeline - Build, Scan, & GitOps Deploy
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - 'deployment/**'
   workflow_dispatch:
 
 jobs:
@@ -100,27 +102,14 @@ jobs:
           format: table
           severity: CRITICAL,HIGH
 
-      - name: Update Helm values.yaml tag
+      - name: Update Kubernetes web.yaml image tag
         run: |
-          python -c '
-          import yaml
-          path = "deploy/helm/blogging-app/values.yaml"
-          with open(path, "r") as f:
-              data = yaml.safe_load(f)
-          
-          if "image" in data:
-              data["image"]["tag"] = "v1.0.${{ github.run_number }}"
-          else:
-              data["tag"] = "v1.0.${{ github.run_number }}"
-              
-          with open(path, "w") as f:
-              yaml.dump(data, f)
-          '
+          sed -i "s|image: xedose/blogging-app:.*|image: xedose/blogging-app:v1.0.${{ github.run_number }}|g" deployment/k8s/web.yaml
 
-      - name: Commit and Push Updated Values to GitOps
+      - name: Commit and Push Updated Manifest to GitOps
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          file_pattern: deploy/helm/blogging-app/values.yaml
+          file_pattern: deployment/k8s/web.yaml
           commit_message: "chore(gitops): update image tag to v1.0.${{ github.run_number }} [skip ci]"
           commit_user_name: "GitHub Actions Bot"
           commit_user_email: "actions@github.com"

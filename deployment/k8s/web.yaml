@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blogging-web-deployment
+  namespace: blogging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blogging-web
+  template:
+    metadata:
+      labels:
+        app: blogging-web
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: busybox:1.36
+          command: ['sh', '-c', 'until nc -z db 5432; do echo "Waiting for postgres..."; sleep 2; done']
+      containers:
+        - name: django-app
+          image: xedose/blogging-app:latest
+          command:
+            - sh
+            - -c
+            - python manage.py migrate && gunicorn myproject.wsgi:application --bind 0.0.0.0:8000 --workers 3 --threads 2
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: blogging-env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blogging-web-service
+  namespace: blogging
+spec:
+  selector:
+    app: blogging-web
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP
