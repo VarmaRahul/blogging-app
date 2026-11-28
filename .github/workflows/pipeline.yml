@@ -107,7 +107,7 @@ jobs:
           sed -i "s|image: xedose/blogging-app:.*|image: xedose/blogging-app:v1.0.${{ github.run_number }}|g" deployment/k8s/web.yaml
 
       - name: Commit and Push Updated Manifest to GitOps
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           file_pattern: deployment/k8s/web.yaml
           commit_message: "chore(gitops): update image tag to v1.0.${{ github.run_number }} [skip ci]"
