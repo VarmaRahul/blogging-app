@@ -19,7 +19,7 @@ spec:
           command: ['sh', '-c', 'until nc -z db 5432; do echo "Waiting for postgres..."; sleep 2; done']
       containers:
         - name: django-app
-          image: xedose/blogging-app:latest
+          image: xedose/blogging-app:v1.0.1
           command:
             - sh
             - -c
